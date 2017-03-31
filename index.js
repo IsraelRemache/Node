@@ -1,21 +1,11 @@
 var express = require('express')
+var mongoose = require('mongoose')
+
+mongoose.connect('mongodb://localhost/nodedemo');
 var app = express()
 
-
-
-app.get('/messages/get', function (req, res) {
-	res.send('Getting messages')
-
-})
-
-app.get('/messages/get/:id', function(req, res){
-	res.send('Getting message' + req.params.id )
-})
-
-app.post('messages/create', function(req,res){
-	res.send('Posting new message')
-
-})
+app.use("/", require('./routes/index'));
+app.use("/messages", require('./routes/messages'))
 
 app.listen(3000, function (){
 	console.log('Example app blablabla ')
